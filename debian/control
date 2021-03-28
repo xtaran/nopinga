@@ -18,7 +18,7 @@ Depends: libnet-dns-perl,
          ${misc:Depends}
 Description: noping wrapper that pings all IP addresses for a hostname
  nopinga is a small wrapper around noping, the NCurses frontend to
- liboping to allow to ping all addresses a hostname given on the
+ liboping to allow one to ping all addresses a hostname given on the
  commandline potentially resolves to.
  .
  This helps to ping both, IPv4 and IPv6 addresses of dual-stack hosts

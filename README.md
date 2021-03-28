@@ -5,7 +5,7 @@ About
 -----
 
 `nopinga` is a small wrapper around `noping`, the NCurses frontend to
-[liboping](https://github.com/octo/liboping) to allow to ping all
+[liboping](https://github.com/octo/liboping) to allow one to ping all
 addresses a hostname given on the commandline potentially resolves to.
 
 This helps to ping both, IPv4 and IPv6 addresses of dual-stack hosts
