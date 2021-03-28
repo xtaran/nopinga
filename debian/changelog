@@ -1,3 +1,10 @@
+nopinga (1.1.0-1) UNRELEASED; urgency=medium
+
+  * New upstream release.
+  * Grammar fixes in package description.
+
+ -- Axel Beckert <abe@debian.org>  Sun, 28 Mar 2021 23:20:01 +0200
+
 nopinga (1.0.0-1) UNRELEASED; urgency=medium
 
   * Initial release

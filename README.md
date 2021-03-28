@@ -35,11 +35,13 @@ least Perl 5.10. Additionally it requires these Perl modules:
 * `Regexp::Common`
 
 
-Versioning
-----------
+Versioning and Changelog
+------------------------
 
 The version number scheme adheres to [Semantic
-Versioning](https://semver.org/).
+Versioning](https://semver.org/) and
+[keeps](https://keepachangelog.com/en/1.0.0/) a
+[changelog](CHANGELOG.md).
 
 
 Author, Copyright and License
