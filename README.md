@@ -11,9 +11,9 @@ addresses a hostname given on the commandline potentially resolves to.
 This helps to ping both, IPv4 and IPv6 addresses of dual-stack hosts
 as well as pinging all IP addresses of loadbalancer systems.
 
-It is essentially an implementation of [liboping issue
-#52: Please add a (n)oping option to ping all IP addresses (i.e. both,
-IPv4 and IPv6) for given
+It is essentially an implementation of [liboping feature request
+(issue) #52: Please add a (n)oping option to ping all IP addresses
+(i.e. both, IPv4 and IPv6) for given
 hostnames](https://github.com/octo/liboping/issues/52), so far only
 for `noping`, but it should be easy to add support for `oping`, too.
 
