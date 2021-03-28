@@ -1,0 +1,70 @@
+#!/usr/bin/perl
+
+# Copyright (C) 2021, Axel Beckert <abe@deuxchevaux.org>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see https://www.gnu.org/licenses/.
+
+use strict;
+use warnings;
+use v5.10;
+
+use Regexp::Common qw(net);
+use Net::DNS;
+
+my @to_ping;
+my @options;
+
+my $resolver = Net::DNS::Resolver->new();
+
+while (my $param = shift) {
+    if ($param =~ /^-/) {
+        push(@options, $param);
+        # Options with parameters
+        if ($param =~ /^-[ciwtIBOQmgHPZ]$/) {
+            push(@options, shift);
+        }
+
+        # Options which make no sense in this script
+        if ($param =~ /^-[46]$/) {
+            die "Options -4 and -6 are orthogonal to what this script tries to accomplish."
+        }
+
+        # Options which are not yet supported in this script
+        if ($param =~ /^-f$/) {
+            die "Option -f is not yet supported by this script."
+        }
+    }
+
+    if ($param =~ /^($RE{net}{IPv4}|$RE{net}{IPv6})$/) {
+        push(@to_ping, $param);
+        next;
+    }
+
+    my $p_a = $resolver->search( $param, 'A' );
+    my $p_aaaa = $resolver->search( $param, 'AAAA' );
+
+    if ($p_a) {
+        my @rr_a = $p_a->answer();
+        push(@to_ping, map { $_->address() } @rr_a) if @rr_a;
+    }
+
+    if ($p_aaaa) {
+        my @rr_aaaa = $p_aaaa->answer();
+        push(@to_ping, map { $_->address() } @rr_aaaa) if @rr_aaaa;
+    }
+}
+
+# Debug stuff
+#say join("\n", @to_ping);
+exec('noping', @options, @to_ping);
