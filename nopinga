@@ -65,8 +65,18 @@ while (my $param = shift) {
         my @rr_aaaa = $p_aaaa->answer();
         push(@to_ping, map { $_->address() } @rr_aaaa) if @rr_aaaa;
     }
+
+    if (!$p_a and !$p_aaaa) {
+        warn "$0: Parameter \"$param\" does not resolve at all. Skipping.\n";
+    }
 }
 
-# Debug stuff
-#say join("\n", @to_ping);
-exec('noping', @options, @to_ping);
+if (@to_ping) {
+    # Debug stuff
+    #say join("\n", @to_ping);
+    exec('noping', @options, @to_ping);
+} else {
+    die "\n".
+        "$0: Either no hosts given or none of the given hosts resolves.\n".
+        "$0: Exiting.\n";
+}
