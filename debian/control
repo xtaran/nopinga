@@ -1,0 +1,25 @@
+Source: nopinga
+Maintainer: Axel Beckert <abe@debian.org>
+Section: net
+Priority: optional
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.5.1
+Vcs-Browser: https://github.com/xtaran/nopinga
+Vcs-Git: https://github.com/xtaran/nopinga.git
+Homepage: https://github.com/xtaran/nopinga
+Rules-Requires-Root: no
+
+Package: nopinga
+Architecture: all
+Depends: libnet-dns-perl,
+         libregexp-common-perl,
+         oping,
+         perl,
+         ${misc:Depends}
+Description: noping wrapper that pings all IP addresses for a hostname
+ nopinga is a small wrapper around noping, the NCurses frontend to
+ liboping to allow to ping all addresses a hostname given on the
+ commandline potentially resolves to.
+ .
+ This helps to ping both, IPv4 and IPv6 addresses of dual-stack hosts
+ as well as pinging all IP addresses of loadbalancer systems.

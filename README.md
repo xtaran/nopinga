@@ -35,6 +35,13 @@ least Perl 5.10. Additionally it requires these Perl modules:
 * `Regexp::Common`
 
 
+Versioning
+----------
+
+The version number scheme adheres to [Semantic
+Versioning](https://semver.org/).
+
+
 Author, Copyright and License
 -----------------------------
 
