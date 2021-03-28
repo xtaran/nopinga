@@ -1,6 +1,9 @@
 nopinga
 =======
 
+About
+-----
+
 `nopinga` is a small wrapper around `noping`, the NCurses frontend to
 [liboping](https://github.com/octo/liboping) to allow to ping all
 addresses a hostname given on the commandline potentially resolves to.
@@ -20,6 +23,17 @@ All options and parameter to options are passed to `noping` unmodified
 implemented.
 
 Option accumulation is currently not supported either.
+
+
+Dependencies
+------------
+
+`noping` is written in [Perl](https://www.perl.org/) and requires at
+least Perl 5.10. Additionally it requires these Perl modules:
+
+* `Net::DNS`
+* `Regexp::Common`
+
 
 Author, Copyright and License
 -----------------------------
