@@ -20,7 +20,7 @@ for `noping`, but it should be easy to add support for `oping`, too.
 All options and parameter to options are passed to `noping` unmodified
 — with the exception of unssupported options, namely `-4` and `-6`
 (which make not much sense in this case) as well as `-f` (not yet
-implemented.
+implemented).
 
 Option accumulation is currently not supported either.
 
