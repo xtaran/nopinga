@@ -14,6 +14,13 @@ IPv4 and IPv6) for given
 hostnames](https://github.com/octo/liboping/issues/52), so far only
 for `noping`, but it should be easy to add support for `oping`, too.
 
+All options and parameter to options are passed to `noping` unmodified
+— with the exception of unssupported options, namely `-4` and `-6`
+(which make not much sense in this case) as well as `-f` (not yet
+implemented.
+
+Option accumulation is currently not supported either.
+
 Author, Copyright and License
 -----------------------------
 
