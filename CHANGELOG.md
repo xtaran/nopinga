@@ -13,6 +13,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Added
 
 * Error handling wrt. to non-resolving hosts
+* Add support for CNAME records
 
 ### Bug Fixes
 

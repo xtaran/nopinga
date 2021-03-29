@@ -76,7 +76,27 @@ sub get_ip_addresses {
 
         if ($pkt{$rr_type}) {
             my @rr = $pkt{$rr_type}->answer();
-            push(@ip_addresses, map { $_->address() } @rr) if @rr;
+            if (@rr) {
+                foreach my $response (@rr) {
+                    # Check for CNAMEs first, they need another round
+                    # of DNS resolution.
+                    if ($response->type eq 'CNAME') {
+                        push(@ip_addresses,
+                             get_ip_addresses($response->cname));
+                    }
+                    # Else it should be of the expected record type
+                    # for which we asked for.
+                    elsif ($response->type eq $rr_type) {
+                        push(@ip_addresses, $response->address());
+                    }
+
+                    else {
+                        die "$0: ASSERTION FAILED: RR type ".
+                            $response->type.
+                            " is neither CNAME nor $rr_type.";
+                    }
+                }
+            }
         }
     }
 
