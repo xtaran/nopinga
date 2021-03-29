@@ -69,21 +69,18 @@ if (@to_ping) {
 sub get_ip_addresses {
     my $hostname = shift;
     my @ip_addresses = ();
+    my %pkt = ();
 
-    my $p_a = $resolver->search( $hostname, 'A' );
-    my $p_aaaa = $resolver->search( $hostname, 'AAAA' );
+    foreach my $rr_type (qw(A AAAA)) {
+        $pkt{$rr_type} = $resolver->search($hostname, $rr_type);
 
-    if ($p_a) {
-        my @rr_a = $p_a->answer();
-        push(@ip_addresses, map { $_->address() } @rr_a) if @rr_a;
+        if ($pkt{$rr_type}) {
+            my @rr = $pkt{$rr_type}->answer();
+            push(@ip_addresses, map { $_->address() } @rr) if @rr;
+        }
     }
 
-    if ($p_aaaa) {
-        my @rr_aaaa = $p_aaaa->answer();
-        push(@ip_addresses, map { $_->address() } @rr_aaaa) if @rr_aaaa;
-    }
-
-    if (!$p_a and !$p_aaaa) {
+    if (!$pkt{'A'} and !$pkt{'AAAA'}) {
         warn "$0: Parameter \"$hostname\" does not resolve at all. Skipping.\n";
     }
 
