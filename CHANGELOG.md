@@ -18,6 +18,11 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 * Grammar fixes in README and package
 
+### Changed
+
+* Refactored DNS resolving code to sport less code duplication and
+  make it easier to maintain.
+
 ## [1.0.0] - 2021-03-28
 
 Initial release.
