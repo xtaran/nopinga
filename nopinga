@@ -53,22 +53,7 @@ while (my $param = shift) {
         next;
     }
 
-    my $p_a = $resolver->search( $param, 'A' );
-    my $p_aaaa = $resolver->search( $param, 'AAAA' );
-
-    if ($p_a) {
-        my @rr_a = $p_a->answer();
-        push(@to_ping, map { $_->address() } @rr_a) if @rr_a;
-    }
-
-    if ($p_aaaa) {
-        my @rr_aaaa = $p_aaaa->answer();
-        push(@to_ping, map { $_->address() } @rr_aaaa) if @rr_aaaa;
-    }
-
-    if (!$p_a and !$p_aaaa) {
-        warn "$0: Parameter \"$param\" does not resolve at all. Skipping.\n";
-    }
+    push(@to_ping, get_ip_addresses($param));
 }
 
 if (@to_ping) {
@@ -79,4 +64,28 @@ if (@to_ping) {
     die "\n".
         "$0: Either no hosts given or none of the given hosts resolves.\n".
         "$0: Exiting.\n";
+}
+
+sub get_ip_addresses {
+    my $hostname = shift;
+    my @ip_addresses = ();
+
+    my $p_a = $resolver->search( $hostname, 'A' );
+    my $p_aaaa = $resolver->search( $hostname, 'AAAA' );
+
+    if ($p_a) {
+        my @rr_a = $p_a->answer();
+        push(@ip_addresses, map { $_->address() } @rr_a) if @rr_a;
+    }
+
+    if ($p_aaaa) {
+        my @rr_aaaa = $p_aaaa->answer();
+        push(@ip_addresses, map { $_->address() } @rr_aaaa) if @rr_aaaa;
+    }
+
+    if (!$p_a and !$p_aaaa) {
+        warn "$0: Parameter \"$hostname\" does not resolve at all. Skipping.\n";
+    }
+
+    return @ip_addresses;
 }
