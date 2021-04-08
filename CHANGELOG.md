@@ -14,6 +14,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 * Error handling wrt. to non-resolving hosts
 * Add support for CNAME records
+* Pass each resolved IP address only once to `noping`, even if some
+  were resolved multiple times.
 
 ### Bug Fixes
 

@@ -23,6 +23,7 @@ our $VERSION = '1.1.0';
 
 use Regexp::Common qw(net);
 use Net::DNS;
+use List::Util qw(uniq);
 
 my @to_ping;
 my @options;
@@ -57,6 +58,8 @@ while (my $param = shift) {
 }
 
 if (@to_ping) {
+    @to_ping = uniq(@to_ping);
+
     # Debug stuff
     #say join("\n", @to_ping);
     exec('noping', @options, @to_ping);

@@ -33,6 +33,7 @@ least Perl 5.10. Additionally it requires these Perl modules:
 
 * `Net::DNS`
 * `Regexp::Common`
+* `List::Util` (part of Perl's core as of this writing)
 
 
 Versioning and Changelog
