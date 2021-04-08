@@ -60,8 +60,8 @@ while (my $param = shift) {
 if (@to_ping) {
     @to_ping = uniq(@to_ping);
 
-    # Debug stuff
-    #say join("\n", @to_ping);
+    ### DEBUG: sort @to_ping
+    ### exit 0
     exec('noping', @options, @to_ping);
 } else {
     die "\n".
@@ -84,6 +84,7 @@ sub get_ip_addresses {
                     # Check for CNAMEs first, they need another round
                     # of DNS resolution.
                     if ($response->type eq 'CNAME') {
+                        ### DEBUG: $hostname is a CNAME: $response->cname
                         push(@ip_addresses,
                              get_ip_addresses($response->cname));
                     }

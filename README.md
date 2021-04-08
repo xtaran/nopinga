@@ -35,6 +35,18 @@ least Perl 5.10. Additionally it requires these Perl modules:
 * `Regexp::Common`
 * `List::Util` (part of Perl's core as of this writing)
 
+### Development and Debugging
+
+`nopinga` uses `Smart::Comment`-style comments as debugging
+statements. I use them like this:
+
+```
+$ perl -MSmart::Comments ./nopinga www.example.org
+
+### DEBUG: '2606:2800:220:1:248:1893:25c8:1946',
+###        '93.184.216.34'
+```
+
 
 Versioning and Changelog
 ------------------------
